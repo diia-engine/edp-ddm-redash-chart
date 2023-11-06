@@ -1,11 +1,13 @@
+{{- if eq .Values.global.deploymentMode "development" }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-tools-redash-admin
+  name: admin-tools-{{ .Values.redash.instance.name.admin }}
   annotations:
     ingress.kubernetes.io/service-upstream: 'true'
     konghq.com/override: kong-admin-tools-set-timeouts
     konghq.com/path: /
+    konghq.com/plugins: portals-cors-plugin
     konghq.com/protocol: http
   labels:
     helm.sh/chart: {{ .Values.redash.instance.name.admin }}-2.3.0
@@ -26,3 +28,4 @@ spec:
     app.kubernetes.io/component: server
   sessionAffinity: None
   type: ClusterIP
+{{- end }}
