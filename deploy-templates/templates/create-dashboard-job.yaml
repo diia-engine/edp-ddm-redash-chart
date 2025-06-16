@@ -17,7 +17,7 @@ spec:
         runAsUser: {{ .Values.podSecurityContext.runAsUser }}
       initContainers:
       - name: check-if-db-is-ready
-        image: {{ template "imageRegistry" . -}} bitnami/postgresql:latest
+        image: {{ template "imageRegistry" . -}} bitnami/postgresql:14.5.0-debian-11-r28
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
           - sh
